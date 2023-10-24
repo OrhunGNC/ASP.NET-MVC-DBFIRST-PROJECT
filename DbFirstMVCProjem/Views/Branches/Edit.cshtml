@@ -1,0 +1,41 @@
+﻿@model DbFirstMVCProjem.Models.Branch
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+<br />
+<h2 class="col-md-4" style="padding-left:20px;">Edit Branch</h2>
+<br />
+
+@using (Html.BeginForm())
+{
+
+    @Html.HiddenFor(model => model.branchID)
+    <div class="form-horizontal" style="background-color: #191C24; color: white;padding-left:20px;">
+        <div class="form-group">
+            @Html.LabelFor(model => model.branchAdress, "Branch Adress", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.TextAreaFor(model => model.branchAdress, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.branchAdress, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.branchPhone, "Branch Phone", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.TextAreaFor(model => model.branchPhone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.branchPhone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.branchCapital, "Branch Capital", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.TextAreaFor(model => model.branchCapital, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.branchCapital, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+
+    </div>
+    <input type="submit" class="btn btn-success" value="Update" />
+    @Html.ActionLink("Back To List", "Index", "Branches", null, new { @class = "btn btn-light" })
+}

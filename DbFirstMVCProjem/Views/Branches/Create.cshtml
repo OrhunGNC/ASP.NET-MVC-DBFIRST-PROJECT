@@ -1,0 +1,38 @@
+﻿@model DbFirstMVCProjem.Models.Branch
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Create New Branch</h2>
+
+@using (Html.BeginForm())
+            {
+<div class="form-horizontal" style="background-color: #191C24;color:white;">
+    <div class="form-group">
+        @Html.LabelFor(model => model.branchAdress, "Branch Adress")
+        <br />
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.branchAdress, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.branchPhone, "Branch Phone")
+        <br />
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.branchPhone, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.branchCapital, "Branch Capital")
+        <br />
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.branchCapital, new { @class = "form-control" })
+        </div>
+    </div>
+    <br />
+    <input type="submit" class="btn btn-success" value="Save" />
+    @Html.ActionLink("Back To List", "Index", "Branches", null, new {@class="btn btn-light"})
+</div>
+            }
+

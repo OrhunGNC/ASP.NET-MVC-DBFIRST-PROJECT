@@ -1,0 +1,34 @@
+﻿@model DbFirstMVCProjem.Models.Branch
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+<h2>Are You Sure to Delete Branch?</h2>
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.branchID)
+
+    <table class="table table-danger">
+        <thead>
+            <tr>
+                <th>BranchID</th>
+                <th>Branch Adress</th>
+                <th>Branch Phone</th>
+                <th>Branch Capital</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.branchID</td>
+                <td>@Model.branchAdress</td>
+                <td>@Model.branchPhone</td>
+                <td>@Model.branchCapital</td>
+            </tr>
+        </tbody>
+
+    </table>
+    <input type="submit" class="btn btn-danger" value="Delete" />
+    @Html.ActionLink("Back To List", "Index", "Branches", null, new { @class = "btn btn-light" })
+}
+
+

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="90904aa509034446a27a66c6a1d32306" Name="Diagram1">
+        <EntityTypeShape EntityType="BankModel.Account" Width="1.5" PointX="3" PointY="4.625" />
+        <EntityTypeShape EntityType="BankModel.Branch" Width="1.5" PointX="0.75" PointY="4.875" />
+        <EntityTypeShape EntityType="BankModel.Card" Width="1.5" PointX="5.25" PointY="5" />
+        <EntityTypeShape EntityType="BankModel.Customer" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BankModel.Staff" Width="1.5" PointX="3" PointY="8" />
+        <AssociationConnector Association="BankModel.FK_Accounts_Branches" />
+        <AssociationConnector Association="BankModel.FK_Accounts_Customers" />
+        <AssociationConnector Association="BankModel.FK_Cards_Accounts" />
+        <AssociationConnector Association="BankModel.FK_Staff_Branches" />
+        <EntityTypeShape EntityType="BankModel.admin" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="BankModel.sysdiagram" Width="1.5" PointX="5.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

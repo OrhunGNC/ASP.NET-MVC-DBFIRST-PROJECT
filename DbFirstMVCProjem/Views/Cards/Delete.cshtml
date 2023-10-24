@@ -1,0 +1,31 @@
+﻿@model DbFirstMVCProjem.Models.Card
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Are You Sure You Want To Delete Your Card</h2>
+@using (Html.BeginForm())
+            {
+                <table class="table table-danger">
+                    <thead>
+                        <tr>
+                            <th>Card ID</th>
+                            <th>Card Type</th>
+                            <th>Card Limit</th>
+                            <th>Account No</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Model.cardID</td>
+                            <td>@Model.cardType</td>
+                            <td>@Model.cardLimit</td>
+                            <td>@Model.accountNo</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <input type="submit" class="btn btn-danger" value="Delete" />
+                @Html.ActionLink("Back To List", "Index", null, new {@class="btn btn-light"})
+            }
+

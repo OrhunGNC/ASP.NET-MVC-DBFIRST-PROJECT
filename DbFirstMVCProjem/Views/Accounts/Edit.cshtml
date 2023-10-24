@@ -1,0 +1,46 @@
+﻿@model DbFirstMVCProjem.Models.Account
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Edit Your Account</h2>
+@using (Html.BeginForm())
+            {
+                @Html.HiddenFor(x=>x.accountNo)
+<div class="form-horizontal">
+    <div class="form-group">
+        @Html.LabelFor(x => x.accountBalance, "Account Balance")
+        <br />
+        <div class="col-md-4">
+            @Html.TextAreaFor(x => x.accountBalance, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.accountBalance, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.accountType, "Account Type")
+        <br />
+        <div class="col-md-4">
+            @Html.TextAreaFor(x => x.accountType, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.accountType, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.customerID, "Customer Name")
+        <br />
+        <div class="col-md-4">
+            @Html.DropDownListFor(x => x.customerID, (List<SelectListItem>)ViewBag.veri)
+            @Html.ValidationMessageFor(x => x.customerID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.branchID, "Branch Adress")
+        <br />
+        <div class="col-md-4">
+            @Html.DropDownListFor(x => x.branchID, (List<SelectListItem>)ViewBag.veri2)
+            @Html.ValidationMessageFor(x => x.branchID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+            }
+

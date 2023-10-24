@@ -1,0 +1,51 @@
+﻿@model DbFirstMVCProjem.Models.Staff
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Add New Staff</h2>
+@using (Html.BeginForm())
+            {
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.staffName, "Staff Name")
+                        <div class="col-md-4">
+                            @Html.EditorFor(x => x.staffName)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.staffPhone, "Staff Phone")
+                        <div class="col-md-4">
+                            @Html.EditorFor(x => x.staffPhone)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.staffAdress, "Staff Adress")
+                        <div class="col-md-4">
+                            @Html.EditorFor(x => x.staffAdress)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.staffTitle, "Staff Title")
+                        <div class="col-md-4">
+                            @Html.EditorFor(x => x.staffTitle)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.staffSalary, "Staff Salary")
+                        <div class="col-md-4">
+                            @Html.EditorFor(x => x.staffSalary)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.branchID, "Branch Adress")
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(x => x.branchID,(List<SelectListItem>)ViewBag.veri)
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-success" value="Save" />
+                @Html.ActionLink("Back To List", "Index", null, new {@class="btn btn-light"})
+            }
+

@@ -1,0 +1,50 @@
+﻿@model DbFirstMVCProjem.Models.Customer
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Add New Customer</h2>
+@using (Html.BeginForm())
+            {
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.customerName, "Customer Name")
+                        <br />
+                        <div class="col-md-4">
+                            @Html.EditorFor(x => x.customerName, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.customerPhone, "Customer Phone")
+                        <br />
+                        <div class="col-md-4">
+                            @Html.EditorFor(x => x.customerPhone, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.customerAdress, "Customer Adress")
+                        <br />
+                        <div class="col-md-4">
+                            @Html.EditorFor(x => x.customerAdress, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.customerMail, "Customer Mail")
+                        <br />
+                        <div class="col-md-4">
+                            @Html.EditorFor(x => x.customerMail, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.customerBirthDate, "Customer Birthdate")
+                        <br />
+                        <div class="col-md-4">
+                            @Html.EditorFor(x => x.customerBirthDate, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-success" value="Create" />
+                @Html.ActionLink("Back To List", "Index", null, new {@class="btn btn-light"})
+            }
+

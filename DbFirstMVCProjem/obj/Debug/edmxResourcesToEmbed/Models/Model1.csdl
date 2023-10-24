@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BankModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="BankEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Accounts" EntityType="BankModel.Account" />
+    <EntitySet Name="Branches" EntityType="BankModel.Branch" />
+    <EntitySet Name="Cards" EntityType="BankModel.Card" />
+    <EntitySet Name="Customers" EntityType="BankModel.Customer" />
+    <EntitySet Name="Staffs" EntityType="BankModel.Staff" />
+    <AssociationSet Name="FK_Accounts_Branches" Association="BankModel.FK_Accounts_Branches">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="Account" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Accounts_Customers" Association="BankModel.FK_Accounts_Customers">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Account" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cards_Accounts" Association="BankModel.FK_Cards_Accounts">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Card" EntitySet="Cards" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Staff_Branches" Association="BankModel.FK_Staff_Branches">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="Staff" EntitySet="Staffs" />
+    </AssociationSet>
+    <EntitySet Name="admins" EntityType="BankModel.admin" />
+    <EntitySet Name="sysdiagrams" EntityType="BankModel.sysdiagram" />
+  </EntityContainer>
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="accountNo" />
+    </Key>
+    <Property Name="accountNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="accountBalance" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="accountType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="customerID" Type="Int32" />
+    <Property Name="branchID" Type="Int32" />
+    <NavigationProperty Name="Branch" Relationship="BankModel.FK_Accounts_Branches" FromRole="Account" ToRole="Branch" />
+    <NavigationProperty Name="Customer" Relationship="BankModel.FK_Accounts_Customers" FromRole="Account" ToRole="Customer" />
+    <NavigationProperty Name="Cards" Relationship="BankModel.FK_Cards_Accounts" FromRole="Account" ToRole="Card" />
+  </EntityType>
+  <EntityType Name="Branch">
+    <Key>
+      <PropertyRef Name="branchID" />
+    </Key>
+    <Property Name="branchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="branchAdress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="branchPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="branchCapital" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Accounts" Relationship="BankModel.FK_Accounts_Branches" FromRole="Branch" ToRole="Account" />
+    <NavigationProperty Name="Staffs" Relationship="BankModel.FK_Staff_Branches" FromRole="Branch" ToRole="Staff" />
+  </EntityType>
+  <EntityType Name="Card">
+    <Key>
+      <PropertyRef Name="cardID" />
+    </Key>
+    <Property Name="cardID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cardType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="cardLimit" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="accountNo" Type="Int32" />
+    <NavigationProperty Name="Account" Relationship="BankModel.FK_Cards_Accounts" FromRole="Card" ToRole="Account" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="customerID" />
+    </Key>
+    <Property Name="customerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="customerPhone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="customerAdress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="customerMail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="customerBirthDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Accounts" Relationship="BankModel.FK_Accounts_Customers" FromRole="Customer" ToRole="Account" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="staffID" />
+    </Key>
+    <Property Name="staffID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="staffName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="staffPhone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="staffAdress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="staffTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="staffSalary" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="branchID" Type="Int32" />
+    <NavigationProperty Name="Branch" Relationship="BankModel.FK_Staff_Branches" FromRole="Staff" ToRole="Branch" />
+  </EntityType>
+  <Association Name="FK_Accounts_Branches">
+    <End Type="BankModel.Branch" Role="Branch" Multiplicity="0..1" />
+    <End Type="BankModel.Account" Role="Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="branchID" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="branchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Accounts_Customers">
+    <End Type="BankModel.Customer" Role="Customer" Multiplicity="0..1" />
+    <End Type="BankModel.Account" Role="Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="customerID" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="customerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cards_Accounts">
+    <End Type="BankModel.Account" Role="Account" Multiplicity="0..1" />
+    <End Type="BankModel.Card" Role="Card" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="accountNo" />
+      </Principal>
+      <Dependent Role="Card">
+        <PropertyRef Name="accountNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Staff_Branches">
+    <End Type="BankModel.Branch" Role="Branch" Multiplicity="0..1" />
+    <End Type="BankModel.Staff" Role="Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="branchID" />
+      </Principal>
+      <Dependent Role="Staff">
+        <PropertyRef Name="branchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="admin">
+    <Key>
+      <PropertyRef Name="adminID" />
+    </Key>
+    <Property Name="adminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="adminNickName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="adminPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="adminType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+</Schema>

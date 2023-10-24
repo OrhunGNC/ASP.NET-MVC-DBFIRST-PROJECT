@@ -1,0 +1,38 @@
+﻿@model DbFirstMVCProjem.Models.Card
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Update Your Card</h2>
+@using (Html.BeginForm())
+            {
+                @Html.HiddenFor(x=>x.cardID)
+<div class="form-horizontal">
+    <div class="form-group">
+        @Html.LabelFor(x => x.cardType, "Card Type")
+        <div class="col-md-4">
+            @Html.TextAreaFor(x => x.cardType, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.cardType, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.cardLimit, "Card Limit")
+        <div class="col-md-4">
+            @Html.TextAreaFor(x => x.cardLimit, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.cardLimit, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.accountNo, "Account No")
+        <div class="col-md-4">
+            @Html.DropDownListFor(x => x.accountNo, (List<SelectListItem>)ViewBag.veri)
+            @Html.ValidationMessageFor(x => x.accountNo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+<br />
+<input type="submit" class="btn btn-success" value="Update" />
+@Html.ActionLink("Back To List", "Index", null, new {@class="btn btn-light"})
+            }
+

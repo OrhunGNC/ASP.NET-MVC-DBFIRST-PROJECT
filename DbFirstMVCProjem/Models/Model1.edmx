@@ -1,0 +1,412 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BankModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="accountNo" />
+          </Key>
+          <Property Name="accountNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="accountBalance" Type="money" />
+          <Property Name="accountType" Type="varchar" MaxLength="50" />
+          <Property Name="customerID" Type="int" />
+          <Property Name="branchID" Type="int" />
+        </EntityType>
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="adminID" />
+          </Key>
+          <Property Name="adminID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="adminNickName" Type="varchar" MaxLength="50" />
+          <Property Name="adminPassword" Type="varchar" MaxLength="50" />
+          <Property Name="adminType" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Branches">
+          <Key>
+            <PropertyRef Name="branchID" />
+          </Key>
+          <Property Name="branchID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="branchAdress" Type="varchar" MaxLength="50" />
+          <Property Name="branchPhone" Type="varchar" MaxLength="50" />
+          <Property Name="branchCapital" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Cards">
+          <Key>
+            <PropertyRef Name="cardID" />
+          </Key>
+          <Property Name="cardID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cardType" Type="varchar" MaxLength="50" />
+          <Property Name="cardLimit" Type="money" />
+          <Property Name="accountNo" Type="int" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="customerID" />
+          </Key>
+          <Property Name="customerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="customerName" Type="varchar" MaxLength="50" />
+          <Property Name="customerPhone" Type="varchar" MaxLength="11" />
+          <Property Name="customerAdress" Type="varchar" MaxLength="50" />
+          <Property Name="customerMail" Type="varchar" MaxLength="50" />
+          <Property Name="customerBirthDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="staffID" />
+          </Key>
+          <Property Name="staffID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="staffName" Type="varchar" MaxLength="50" />
+          <Property Name="staffPhone" Type="varchar" MaxLength="11" />
+          <Property Name="staffAdress" Type="varchar" MaxLength="50" />
+          <Property Name="staffTitle" Type="varchar" MaxLength="50" />
+          <Property Name="staffSalary" Type="money" />
+          <Property Name="branchID" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Accounts_Branches">
+          <End Role="Branches" Type="Self.Branches" Multiplicity="0..1" />
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branches">
+              <PropertyRef Name="branchID" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="branchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Accounts_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="customerID" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="customerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cards_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="Cards" Type="Self.Cards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="accountNo" />
+            </Principal>
+            <Dependent Role="Cards">
+              <PropertyRef Name="accountNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_Branches">
+          <End Role="Branches" Type="Self.Branches" Multiplicity="0..1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branches">
+              <PropertyRef Name="branchID" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="branchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BankModelStoreContainer">
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="admin" EntityType="Self.admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Branches" EntityType="Self.Branches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cards" EntityType="Self.Cards" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Accounts_Branches" Association="Self.FK_Accounts_Branches">
+            <End Role="Branches" EntitySet="Branches" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Accounts_Customers" Association="Self.FK_Accounts_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cards_Accounts" Association="Self.FK_Cards_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Cards" EntitySet="Cards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Branches" Association="Self.FK_Staff_Branches">
+            <End Role="Branches" EntitySet="Branches" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BankModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BankEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="BankModel.Account" />
+          <EntitySet Name="Branches" EntityType="BankModel.Branch" />
+          <EntitySet Name="Cards" EntityType="BankModel.Card" />
+          <EntitySet Name="Customers" EntityType="BankModel.Customer" />
+          <EntitySet Name="Staffs" EntityType="BankModel.Staff" />
+          <AssociationSet Name="FK_Accounts_Branches" Association="BankModel.FK_Accounts_Branches">
+            <End Role="Branch" EntitySet="Branches" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Accounts_Customers" Association="BankModel.FK_Accounts_Customers">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cards_Accounts" Association="BankModel.FK_Cards_Accounts">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Card" EntitySet="Cards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Branches" Association="BankModel.FK_Staff_Branches">
+            <End Role="Branch" EntitySet="Branches" />
+            <End Role="Staff" EntitySet="Staffs" />
+          </AssociationSet>
+          <EntitySet Name="admins" EntityType="BankModel.admin" />
+          <EntitySet Name="sysdiagrams" EntityType="BankModel.sysdiagram" />
+        </EntityContainer>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="accountNo" />
+          </Key>
+          <Property Name="accountNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="accountBalance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="accountType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="customerID" Type="Int32" />
+          <Property Name="branchID" Type="Int32" />
+          <NavigationProperty Name="Branch" Relationship="BankModel.FK_Accounts_Branches" FromRole="Account" ToRole="Branch" />
+          <NavigationProperty Name="Customer" Relationship="BankModel.FK_Accounts_Customers" FromRole="Account" ToRole="Customer" />
+          <NavigationProperty Name="Cards" Relationship="BankModel.FK_Cards_Accounts" FromRole="Account" ToRole="Card" />
+        </EntityType>
+        <EntityType Name="Branch">
+          <Key>
+            <PropertyRef Name="branchID" />
+          </Key>
+          <Property Name="branchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="branchAdress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="branchPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="branchCapital" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Accounts" Relationship="BankModel.FK_Accounts_Branches" FromRole="Branch" ToRole="Account" />
+          <NavigationProperty Name="Staffs" Relationship="BankModel.FK_Staff_Branches" FromRole="Branch" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="Card">
+          <Key>
+            <PropertyRef Name="cardID" />
+          </Key>
+          <Property Name="cardID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cardType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cardLimit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="accountNo" Type="Int32" />
+          <NavigationProperty Name="Account" Relationship="BankModel.FK_Cards_Accounts" FromRole="Card" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="customerID" />
+          </Key>
+          <Property Name="customerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="customerPhone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="customerAdress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="customerMail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="customerBirthDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Accounts" Relationship="BankModel.FK_Accounts_Customers" FromRole="Customer" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="staffID" />
+          </Key>
+          <Property Name="staffID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="staffName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="staffPhone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="staffAdress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="staffTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="staffSalary" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="branchID" Type="Int32" />
+          <NavigationProperty Name="Branch" Relationship="BankModel.FK_Staff_Branches" FromRole="Staff" ToRole="Branch" />
+        </EntityType>
+        <Association Name="FK_Accounts_Branches">
+          <End Type="BankModel.Branch" Role="Branch" Multiplicity="0..1" />
+          <End Type="BankModel.Account" Role="Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="branchID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="branchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Accounts_Customers">
+          <End Type="BankModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="BankModel.Account" Role="Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="customerID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="customerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cards_Accounts">
+          <End Type="BankModel.Account" Role="Account" Multiplicity="0..1" />
+          <End Type="BankModel.Card" Role="Card" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="accountNo" />
+            </Principal>
+            <Dependent Role="Card">
+              <PropertyRef Name="accountNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_Branches">
+          <End Type="BankModel.Branch" Role="Branch" Multiplicity="0..1" />
+          <End Type="BankModel.Staff" Role="Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="branchID" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="branchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="adminID" />
+          </Key>
+          <Property Name="adminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="adminNickName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="adminPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="adminType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BankModelStoreContainer" CdmEntityContainer="BankEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="BankModel.Account">
+              <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="branchID" ColumnName="branchID" />
+                <ScalarProperty Name="customerID" ColumnName="customerID" />
+                <ScalarProperty Name="accountType" ColumnName="accountType" />
+                <ScalarProperty Name="accountBalance" ColumnName="accountBalance" />
+                <ScalarProperty Name="accountNo" ColumnName="accountNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Branches">
+            <EntityTypeMapping TypeName="BankModel.Branch">
+              <MappingFragment StoreEntitySet="Branches">
+                <ScalarProperty Name="branchCapital" ColumnName="branchCapital" />
+                <ScalarProperty Name="branchPhone" ColumnName="branchPhone" />
+                <ScalarProperty Name="branchAdress" ColumnName="branchAdress" />
+                <ScalarProperty Name="branchID" ColumnName="branchID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cards">
+            <EntityTypeMapping TypeName="BankModel.Card">
+              <MappingFragment StoreEntitySet="Cards">
+                <ScalarProperty Name="accountNo" ColumnName="accountNo" />
+                <ScalarProperty Name="cardLimit" ColumnName="cardLimit" />
+                <ScalarProperty Name="cardType" ColumnName="cardType" />
+                <ScalarProperty Name="cardID" ColumnName="cardID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="BankModel.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="customerBirthDate" ColumnName="customerBirthDate" />
+                <ScalarProperty Name="customerMail" ColumnName="customerMail" />
+                <ScalarProperty Name="customerAdress" ColumnName="customerAdress" />
+                <ScalarProperty Name="customerPhone" ColumnName="customerPhone" />
+                <ScalarProperty Name="customerName" ColumnName="customerName" />
+                <ScalarProperty Name="customerID" ColumnName="customerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staffs">
+            <EntityTypeMapping TypeName="BankModel.Staff">
+              <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="branchID" ColumnName="branchID" />
+                <ScalarProperty Name="staffSalary" ColumnName="staffSalary" />
+                <ScalarProperty Name="staffTitle" ColumnName="staffTitle" />
+                <ScalarProperty Name="staffAdress" ColumnName="staffAdress" />
+                <ScalarProperty Name="staffPhone" ColumnName="staffPhone" />
+                <ScalarProperty Name="staffName" ColumnName="staffName" />
+                <ScalarProperty Name="staffID" ColumnName="staffID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="admins">
+            <EntityTypeMapping TypeName="BankModel.admin">
+              <MappingFragment StoreEntitySet="admin">
+                <ScalarProperty Name="adminType" ColumnName="adminType" />
+                <ScalarProperty Name="adminPassword" ColumnName="adminPassword" />
+                <ScalarProperty Name="adminNickName" ColumnName="adminNickName" />
+                <ScalarProperty Name="adminID" ColumnName="adminID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BankModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

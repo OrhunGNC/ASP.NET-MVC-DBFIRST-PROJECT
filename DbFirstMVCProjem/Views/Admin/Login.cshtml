@@ -1,0 +1,38 @@
+﻿@model DbFirstMVCProjem.Models.admin
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container" style="margin-top:300px;margin-left:700px">
+        <h2>Lütfen Giriş Yapınız</h2>
+        @using (Html.BeginForm("Login", "Admin"))
+        {
+            @ViewBag.hata
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.LabelFor(x =>x.adminNickName, "Username")
+                    @Html.TextBoxFor(x => x.adminNickName, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    @Html.LabelFor(x => x.adminPassword, "Password")
+                    @Html.TextBoxFor(x => x.adminPassword, new { @class = "form-control" })
+                </div>
+            </div>
+            <br />
+            <input type="submit" class="btn btn-primary" value="Giriş Yap">
+        }
+    </div>
+</body>
+</html>

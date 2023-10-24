@@ -1,0 +1,35 @@
+﻿@model DbFirstMVCProjem.Models.Account
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Are You Sure You Want To Delete Your Account?</h2>
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(x => x.accountNo)
+    <table class="table table-danger">
+        <thead>
+            <tr>
+                <th>Account ID</th>
+                <th>Account Balance</th>
+                <th>Account Type</th>
+                <th>Customer Name</th>
+                <th>Branch Adress</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.accountNo</td>
+                <td>@Model.accountBalance</td>
+                <td>@Model.accountType</td>
+                <td>@Model.Customer.customerName</td>
+                <td>@Model.Branch.branchAdress</td>
+            </tr>
+        </tbody>
+    </table>
+    <input type="submit" class="btn btn-danger" value="Delete" />
+    @Html.ActionLink("Back To List", "Index", null, new {@class="btn btn-light"})
+}
+
+
