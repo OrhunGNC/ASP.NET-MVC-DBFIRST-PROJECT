@@ -1,0 +1,43 @@
+﻿@model IEnumerable<DbFirstMVCProjem.Models.ViewModel.CardAccount>
+
+@{
+    ViewBag.Title = "CardAccount";
+    Layout = "~/Views/Shared/_LayoutPage2.cshtml";
+}
+
+<h2>CardAccount</h2>
+
+<table class="table table-bordered" style="background-color:#191C24; color: white;">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CardType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CardLimit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccountBalance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccountType)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CardType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CardLimit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccountBalance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccountType)
+        </td>
+    </tr>
+}
+
+</table>

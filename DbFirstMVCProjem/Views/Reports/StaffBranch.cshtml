@@ -1,0 +1,69 @@
+﻿@model IEnumerable<DbFirstMVCProjem.Models.ViewModel.StaffBranch>
+
+@{
+    ViewBag.Title = "StaffBranch";
+    Layout = "~/Views/Shared/_LayoutPage2.cshtml";
+}
+
+<h2>StaffBranch</h2>
+
+
+<table class="table table-bordered" style="background-color:#191C24; color: white;">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.StaffName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StaffPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StaffAdress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StaffTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StaffSalary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BranchAdress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BranchPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BranchCapital)
+        </th>
+
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.StaffName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StaffPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StaffAdress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StaffTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StaffSalary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BranchAdress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BranchPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BranchCapital)
+        </td>
+    </tr>
+}
+
+</table>

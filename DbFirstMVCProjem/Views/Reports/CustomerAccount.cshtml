@@ -1,0 +1,64 @@
+﻿@model IEnumerable<DbFirstMVCProjem.Models.ViewModel.AccountCustomer>
+
+@{
+    ViewBag.Title = "CustomerAccount";
+    Layout = "~/Views/Shared/_LayoutPage2.cshtml";
+}
+
+<h2>CustomerAccount</h2>
+
+
+<table class="table table-bordered" style="background-color:#191C24; color: white;">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AccountBalance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccountType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerAdress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerMail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerBirthDate)
+        </th>
+
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccountBalance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccountType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerAdress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerMail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerBirthDate)
+        </td>
+
+    </tr>
+}
+
+</table>

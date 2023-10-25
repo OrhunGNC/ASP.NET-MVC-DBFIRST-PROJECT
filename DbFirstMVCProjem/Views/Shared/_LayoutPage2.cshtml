@@ -75,15 +75,27 @@
                                 @Html.ActionLink("Customers", "Index", "Customer", null, new { @class = "dropdown-item" })
                                 @Html.ActionLink("Cards", "Index", "Cards", null, new { @class = "dropdown-item" })
                                 @Html.ActionLink("Staff", "Index", "Staff", null, new { @class = "dropdown-item" })
-                                @Html.ActionLink("Reports", "Index", "Reports", null, new {@class="dropdown-item"})
+
                             }
 
 
                         </div>
-                        <br />
-                        @Html.ActionLink("Logout", "Logout", "Admin", null, new { @class = "nav-item nav-link active" })
-                    </div>
-                </div>
+                        @if (User.IsInRole("A"))
+                        {
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Reports</a>
+                                <div class="dropdown-menu bg-transparent border-0">
+                                    @Html.ActionLink("Card Account Report", "CardAccount", "Reports", null, new { @class = "dropdown-item" })
+                                    @Html.ActionLink("Customer Account Report", "CustomerAccount", "Reports", null, new {@class="dropdown-item"})
+                                    @Html.ActionLink("Staff Branch Report", "StaffBranch", "Reports", null, new {@class="dropdown-item"})
+                                </div>
+                                </div>
+                                }
+
+                                <br />
+                                @Html.ActionLink("Logout", "Logout", "Admin", null, new { @class = "nav-item nav-link active" })
+                            </div>
+                        </div>
             </nav>
         </div>
         <!-- Sidebar End -->

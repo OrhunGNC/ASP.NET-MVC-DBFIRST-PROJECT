@@ -32,5 +32,11 @@ namespace DbFirstMVCProjem.Models
         public virtual DbSet<Staff> Staffs { get; set; }
         public virtual DbSet<admin> admins { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+
+        public System.Data.Entity.DbSet<DbFirstMVCProjem.Models.ViewModel.StaffBranch> StaffBranches { get; set; }
+
+        public System.Data.Entity.DbSet<DbFirstMVCProjem.Models.ViewModel.AccountCustomer> AccountCustomers { get; set; }
+
+        public System.Data.Entity.DbSet<DbFirstMVCProjem.Models.ViewModel.CardAccount> CardAccounts { get; set; }
     }
 }
